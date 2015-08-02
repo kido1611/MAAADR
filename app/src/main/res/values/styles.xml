@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme" parent="@android:style/Theme.DeviceDefault.Light">
+		<item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#ff336699</item>
+		<item name="android:statusBarColor">#FF165C5B</item>
+		<item name="android:navigationBarColor">#FF165C5B</item>
+		<item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+		<item name="android:buttonStyle">@style/Button.Theme</item>
+    </style>
+	<style name="Theme.ActionBar" parent="@android:style/Widget.Holo.ActionBar.Solid">
+		<item name="android:background">#FF1B7B79</item>
+		
+		<item name="android:colorPrimary">#FF1B7B79</item>		
+		<item name="android:textColor">#ffffffff</item>
+<item name="android:icon">@android:color/transparent</item>
+        <item name="android:titleTextStyle">@style/TextAppearance.Holo.Widget.ActionBar.Title</item>	
+    </style>
+	<style name="Button.Theme" parent="@android:style/Widget.Material.Button">
+		<item name="android:textColor">#ff336699</item>
+    </style>
+<style name="GoogleNavDrawer.MainSectionText" parent="android:TextAppearance.Medium">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:minHeight">@dimen/main_section_item_height</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
+    <style name="GoogleNavDrawer.SecondarySectionText" parent="GoogleNavDrawer.MainSectionText">
+        <item name="android:textSize">13sp</item>
+        <item name="android:minHeight">@dimen/secondary_section_item_height</item>
+    </style>
+<style name="TextAppearance.Holo.Widget.ActionBar.Title" parent="@*android:style/TextAppearance.Holo.Medium">
+        <item name="android:textSize">21.0sp</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textStyle">bold</item>		
+<item name="android:textAllCaps">true</item>
+    </style>
+</resources>

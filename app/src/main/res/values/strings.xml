@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MAAAD</string>
+    <string name="app_version_build">Build : Build-1.0</string>
+    <string name="app_version_name">Versi : 1.0</string>
+    <string name="author_email">Author email : dikisatria10@gmail.com</string>
+<string name="maaad_web_name">Mediatek Android Art And Dev</string>
+    <string name="action_about">About</string>
+ <string name="action_back">Back</string>
+
+
+</resources>

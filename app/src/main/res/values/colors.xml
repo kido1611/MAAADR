@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_section_selected">@android:color/transparent</color>
+    <color name="secondary_section_selected">#ccc</color>
+    <color name="secondary_divider_color">#ccc</color>
+<color name="green">#00FF00</color>
+    <color name="thumbColor">#66aaaaaa</color>
+<color name="blue_grey_500">#607D8B</color>
+    <color name="blue_grey_600">#546E7A</color>
+    <color name="blue_grey_700">#455A64</color>
+    <color name="blue_grey_800">#37474F</color>
+    <color name="blue_grey_900">#263238</color>
+</resources>
