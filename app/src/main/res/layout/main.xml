@@ -1,78 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_height="match_parent"
-	android:layout_width="match_parent"
-	android:orientation="vertical"
-	tools:context=".MaaadActivity">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:overScrollMode="never">
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
 
-	<LinearLayout
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent"
-		android:orientation="vertical"
-		android:layout_gravity="bottom"
-		android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp">
 
-		<ImageView
-			android:layout_height="match_parent"
-			android:layout_width="match_parent"
-			android:src="@drawable/cover1"
-			android:id="@+id/Image_cover"
-			android:layout_gravity="top"
-			android:layout_margin="20dp"/>
+            <ImageView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:src="@drawable/cover1"
+                android:id="@+id/Image_cover"
+                android:layout_gravity="top"
+                android:layout_margin="20dp"/>
 
-	</LinearLayout>
+        </LinearLayout>
 
-	<LinearLayout
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent"
-		android:orientation="vertical"
-		android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
-		<ds.sa3a.material.widget.ButtonFlat
-			android:id="@+id/maaad_web"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			android:textColor="#ffffff"
-			android:text="Maaad Web"
-			android:layout_gravity="center"
-			android:layout_margin="10dp"/>
+            <ds.sa3a.material.widget.ButtonFlat
+                android:id="@+id/maaad_web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:text="Maaad Web"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
 
-		<ds.sa3a.material.widget.ButtonFlat
-			android:id="@+id/maaad_group"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			android:textColor="#ffffff"
-			android:text="Maaad Group Fb"
-			android:layout_gravity="center"
-			android:layout_margin="10dp"/>
+            <ds.sa3a.material.widget.ButtonFlat
+                android:id="@+id/maaad_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:text="Maaad Group Fb"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
 
-		<ds.sa3a.material.widget.ButtonFlat
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_centerInParent="true"
-			android:textColor="#ffffff"
-			android:text="Author profile"
-			android:id="@+id/author_profile"
-			android:layout_gravity="center"
-			android:layout_margin="10dp"/>
+            <ds.sa3a.material.widget.ButtonFlat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#ffffff"
+                android:text="Author profile"
+                android:id="@+id/author_profile"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
 
-		<TextView
-			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"
-			android:text="Powered by : kido1611 Sa3A 2015"
-			android:gravity="center"
-			android:layout_gravity="center"
-			android:layout_margin="10dp"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:textColor="#FF1B7B79"
-android:textStyle="bold"
-			android:ellipsize="marquee"/>
-
-	</LinearLayout>
-
-</LinearLayout>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Powered by : kido1611 Sa3A 2015"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="#FF1B7B79"
+                android:textStyle="bold"
+                android:ellipsize="marquee"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
 
