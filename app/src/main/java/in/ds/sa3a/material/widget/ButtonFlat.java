@@ -94,7 +94,7 @@ public class ButtonFlat extends Button {
 	 */
 	@Override
 	protected int makePressColor(){
-		return Color.parseColor("#FF002228");	
+		return Color.parseColor("#FF00FFFB");	
 	}
 	
 	public void setText(String text){

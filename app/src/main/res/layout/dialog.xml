@@ -41,7 +41,7 @@
                     android:id="@+id/message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="dikisatria10@gmaIl.com"
+                    android:text="@string/author_email"
                     android:textColor="#000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -59,7 +59,7 @@
                 android:id="@+id/button_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"                
+                android:text="@string/cancel"                
                 
                 android:visibility="gone" />
 
@@ -67,7 +67,7 @@
                 android:id="@+id/button_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Oke"
+                android:text="@string/oke"
                />
         </LinearLayout>
     </RelativeLayout>

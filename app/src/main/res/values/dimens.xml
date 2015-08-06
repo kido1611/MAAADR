@@ -7,4 +7,6 @@
     <dimen name="secondary_section_icon_size">32dp</dimen>
 <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+<dimen name="activity_layout_margin">10dp</dimen>
+<dimen name="image">200dp</dimen>
 </resources>

@@ -21,6 +21,7 @@ import in.ds.maaad.group.*;
 public class MaaadActivity extends Activity 
 {
 
+	
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,7 +77,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 			return super.onOptionsItemSelected(item);}}
 			
 			private void showDialog(){
-				Dialog dialog = new Dialog(MaaadActivity.this, "About", "Mediatek Android Art and Dev \nApp Version : V"+BuildConfig.VERSION_NAME+"\n \n-  Easy acess to official website \n-  Easy acess to facebook group \n \nAuthor : dikisatria10@gmail.com \nCopyright Diki Satria 2015");
+				Dialog dialog = new Dialog(MaaadActivity.this, "About", "Mediatek Android Art and Dev \nApp Version : V1.5 Beta2\n \n-  Easy acess to official website \n-  Easy acess to facebook group \n \nAuthor : dikisatria10@gmail.com \nCopyright Diki Satria 2015");
 				
 				dialog.setOnCancelButtonClickListener(new View.OnClickListener() {
 					

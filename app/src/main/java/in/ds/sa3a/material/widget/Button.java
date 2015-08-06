@@ -23,7 +23,7 @@ public abstract class Button extends CustomView {
 	int minWidth;
 	int minHeight;
 	int background;
-	float rippleSpeed = 12f;
+	float rippleSpeed = 10f;
 	int rippleSize = 3;
 	Integer rippleColor;
 	OnClickListener onClickListener;

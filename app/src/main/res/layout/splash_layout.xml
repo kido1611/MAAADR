@@ -13,8 +13,8 @@
 		android:layout_gravity="center">
 
 		<ImageView
-			android:layout_height="200dp"
-			android:layout_width="200dp"
+			android:layout_height="@dimen/image"
+			android:layout_width="@dimen/image"
 			android:src="@drawable/cover1"/>
 
 		<ProgressBar

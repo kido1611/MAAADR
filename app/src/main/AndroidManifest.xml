@@ -5,6 +5,7 @@ android:versionCode="1.5"
     package="in.ds.maaad.group" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -36,7 +37,14 @@ android:theme="@style/Theme">
 <activity
             android:name=".MaaadWebActivity"
             android:label="@string/maaad_web_name"
-android:theme="@style/Theme">
+android:theme="@style/Theme"
+android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
+            android:launchMode="singleTask"
+android:parentActivityName="in.ds.maaad.group.MaaadActivity">
+ <!-- Parent activity meta-data to support 4.0 and lower -->
+<meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="in.ds.maaad.group.MaaadActivity" />
         </activity>
     </application>
 
