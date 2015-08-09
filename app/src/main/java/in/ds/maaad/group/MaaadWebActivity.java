@@ -13,6 +13,11 @@ import android.content.res.*;
 import android.support.v4.widget.*;
 import android.util.*;
 
+import java.util.ArrayList;
+
+import in.ds.maaad.group.model.NavDrawerAdapter;
+import in.ds.maaad.group.model.NavDrawerItem;
+
 /*
  * Demo of creating an application to open any URL inside the application and clicking on any link from that URl 
 should not open Native browser but  that URL should open in the same screen.
@@ -31,6 +36,8 @@ public class MaaadWebActivity extends Activity{
     private ListView mDrawerList;
     private String[] itemList;
 
+    private ArrayList<NavDrawerItem> mItems;
+    private NavDrawerAdapter adapter;
 	
     @Override
 	@SuppressLint("setJavaScriptEnabled")
@@ -42,8 +49,23 @@ public class MaaadWebActivity extends Activity{
         itemList = getResources().getStringArray(R.array.item_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        mItems = new ArrayList<NavDrawerItem>();
+        mItems.add(new NavDrawerItem(itemList[0], R.drawable.ic_launcher));
+        mItems.add(new NavDrawerItem(itemList[1], R.drawable.ic_menu_usercp));
+        mItems.add(new NavDrawerItem(itemList[2], R.drawable.ic_menu_index));
+        mItems.add(new NavDrawerItem(itemList[3], R.drawable.ic_menu_portal));
+        mItems.add(new NavDrawerItem(itemList[4], R.drawable.ic_menu_memberlist));
+        mItems.add(new NavDrawerItem(itemList[5], R.drawable.ic_menu_calendar));
+        mItems.add(new NavDrawerItem(itemList[6], R.drawable.ic_menu_help));
+        mItems.add(new NavDrawerItem(itemList[7], R.drawable.ic_menu_search));
+
+        adapter = new NavDrawerAdapter(this, mItems);
+
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, itemList));
+        mDrawerList.setAdapter(adapter);
+
+
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mMaaadWebView = (CustomWebView) findViewById(R.id.activity_main_webview);
         mSplashLayout = (LinearLayout)findViewById(R.id.splashLayout);

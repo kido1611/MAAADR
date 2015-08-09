@@ -16,9 +16,9 @@
 <string name="home">Home</string>
 <string name="no_conectivity">Tidak ada koneksi internet</string>
 <string name="tray__authority">Tidak ada koneksi internet</string>
-<string-array name="item_array">
+    <string-array name="item_array">
         <item>Jump to Top\u0020 &#8593;</item>
-<item>User CP</item>
+        <item>User CP</item>
         <item>Home Index</item>
         <item>Portal</item>
         <item>Member List</item>
