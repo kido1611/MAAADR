@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-android:versionCode="1.5"
-	android:versionName="Build-1.5"
+android:versionCode="2.0"
+	android:versionName="Build-2.0"
     package="in.ds.maaad.group" >
 
     <uses-permission android:name="android.permission.INTERNET" />

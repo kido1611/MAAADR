@@ -10,4 +10,14 @@
     <color name="blue_grey_700">#455A64</color>
     <color name="blue_grey_800">#37474F</color>
     <color name="blue_grey_900">#263238</color>
+<color name="colorPrimary">#FF1B7B79</color>
+    <color name="colorPrimaryDark">#003366</color>
+    <color name="colorAccent">#3b5998</color>
+    <color name="windowBackground">#3b5998</color>
+    <color name="progressBackground">#d4dae8</color>
+    <color name="titleColor">#ffffff</color>
+    <color name="drawerItems">#ffffff</color>
+    <color name="preferenceTitle">#000000</color>
+    <color name="editText">#000000</color>
+    <color name="aboutText">#6d6d6d</color>
 </resources>

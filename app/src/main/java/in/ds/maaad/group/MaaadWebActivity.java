@@ -24,12 +24,12 @@ public class MaaadWebActivity extends Activity{
 	
 	private CustomWebView mMaaadWebView;
 	private LinearLayout mSplashLayout;
-	
     private SwipeRefreshLayout swipeRefreshLayout;
-    // get application context from MainActivity
-    private static Context context = MyApplication.getContextOfApplication();
-
-	private SharedPreferences preferences;
+	private ProgressBar mProgressBar;
+ // variables for drawer layout
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private String[] itemList;
 
 	
     @Override
@@ -38,8 +38,16 @@ public class MaaadWebActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_web_layout);
         
+		// piece of code for drawer layout
+        itemList = getResources().getStringArray(R.array.item_array);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        // set up the drawer's list view with items and click listener
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, itemList));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mMaaadWebView = (CustomWebView) findViewById(R.id.activity_main_webview);
         mSplashLayout = (LinearLayout)findViewById(R.id.splashLayout);
+		mProgressBar = (ProgressBar) findViewById(R.id.progres_loading);
         mMaaadWebView.setWebViewClient(new MaaadWebClient());
         mMaaadWebView.getSettings().setJavaScriptEnabled(true);
         mMaaadWebView.loadUrl("http://www.maaadgroup.com");
@@ -60,6 +68,49 @@ public class MaaadWebActivity extends Activity{
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
 		
 	}
+	// the click listener for ListView in the navigation drawer
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+    }
+	
+	// when a drawer item is clicked do instructions from below
+    private void selectItem(int position) {
+		// standard application menu (it's default)
+		switch (position) {
+			case 0:
+				mMaaadWebView.loadUrl("javascript:scroll(0,0)");
+				break;
+case 1:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/usercp.php");
+				break;
+case 2:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/index.php");
+				break;
+			case 3:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/portal.php");
+				break;
+			case 4:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/memberlist.php");
+				break;
+			case 5:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/calendar.php");
+				break;
+			case 6:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/misc.php?action=help");
+				break;
+			case 7:
+				mMaaadWebView.loadUrl("http://maaadgroup.com/search.php");
+				break;
+			
+	}
+	// update selected item, then close the drawer
+	mDrawerList.setItemChecked(position, true);
+	mDrawerLayout.closeDrawer(mDrawerList);
+	}
+    
 
 	private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
 
@@ -93,19 +144,21 @@ public class MaaadWebActivity extends Activity{
     	public void onPageStarted(WebView view, String url, Bitmap favicon) {
     		// TODO Auto-generated method stub
     		super.onPageStarted(view, url, favicon);
-            mSplashLayout.setVisibility(View.VISIBLE);
+			mProgressBar.setVisibility(View.VISIBLE);
+     
     	}
     	
     	@Override
     	public boolean shouldOverrideUrlLoading(WebView view, String url) {
     		// TODO Auto-generated method stub
 			// handling external links as intents
+			
 			if (Uri.parse(url).getHost().endsWith("maaadgroup.com")) {
 				return false;
 			}
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			view.getContext().startActivity(intent);
-			return true;
+			return false;
 		}
 		
 		@Override
@@ -121,6 +174,7 @@ public class MaaadWebActivity extends Activity{
     		// TODO Auto-generated method stub
     		super.onPageFinished(view, url);
             mSplashLayout.setVisibility(View.GONE);
+			mProgressBar.setVisibility(View.GONE);
 		}
     }
     
