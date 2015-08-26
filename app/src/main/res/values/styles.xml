@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme" parent="@android:style/Theme.DeviceDefault.Light">
-		<item name="android:textColorPrimary">#ffffff</item>
+<style name="AppTheme" parent="@android:style/Theme.DeviceDefault.Light">
+		<item name="android:textColorPrimary">#ff000000</item>
+        <item name="android:textColorSecondary">#ff336699</item>
+		<item name="android:statusBarColor">#FF165C5B</item>
+		<item name="android:navigationBarColor">#FF165C5B</item>
+		<item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+		<item name="android:buttonStyle">@style/Button.Theme</item>
+    </style>
+    <style name="Theme" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="android:textColorPrimary">#ff000000</item>
         <item name="android:textColorSecondary">#ff336699</item>
 		<item name="android:statusBarColor">#FF165C5B</item>
 		<item name="android:navigationBarColor">#FF165C5B</item>
@@ -38,5 +46,22 @@
         <item name="android:textColor">#ffffffff</item>
         <item name="android:textStyle">bold</item>		
 <item name="android:textAllCaps">true</item>
+    </style>
+	<style name="Theme.AppCompat.Preferences" parent="Theme.AppCompat.Light">
+<item name="android:statusBarColor">#FF165C5B</item>
+		<item name="android:navigationBarColor">#FF165C5B</item>
+        <item name="android:textColor">@color/preferenceTitle</item>
+        <item name="android:editTextColor">@color/editText</item>
+        <item name="android:alertDialogTheme">@style/CustomDialogTheme</item>
+<item name="android:actionBarStyle">@style/Theme.ActionBar</item>
+    </style>
+
+    <style name="CustomDialogTheme" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">@android:dimen/dialog_min_width_major</item>
+        <item name="android:windowMinWidthMinor">@android:dimen/dialog_min_width_minor</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 </resources>

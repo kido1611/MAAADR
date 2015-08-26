@@ -1,6 +1,17 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MaaadActivity">
+<item
+        android:id="@+id/action_user"
+        android:orderInCategory="300"
+        android:title="Author Profile"
+        android:icon="@drawable/user"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/action_about"
+android:orderInCategory="200"
 		android:icon="@drawable/ic_action_about"
 		android:title="@string/action_about"
-		android:showAsAction="ifRoom" />
+		android:showAsAction="ifRoom" >
+</item>
 </menu>

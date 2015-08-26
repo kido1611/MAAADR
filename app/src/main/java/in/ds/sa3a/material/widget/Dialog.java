@@ -1,4 +1,4 @@
-package ds.sa3a.material.widget;
+package in.ds.sa3a.material.widget;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import ds.sa3a.material.widget.*;
-import ds.sa3a.material.utils.*;
+import in.ds.sa3a.material.widget.*;
+import in.ds.sa3a.material.utils.*;
 
 import in.ds.maaad.group.*;
 

@@ -1,22 +1,23 @@
 package in.ds.maaad.group;
 
 import android.annotation.*;
-import android.app.*;
 import android.content.*;
 import android.graphics.*;
 import android.net.*;
 import android.os.*;
+import android.preference.*;
+import android.support.v4.widget.*;
+import android.support.v7.app.*;
+import android.support.v7.widget.*;
+import android.util.*;
 import android.view.*;
 import android.webkit.*;
 import android.widget.*;
-import android.content.res.*;
-import android.support.v4.widget.*;
-import android.util.*;
-
-import java.util.ArrayList;
-
-import in.ds.maaad.group.model.NavDrawerAdapter;
-import in.ds.maaad.group.model.NavDrawerItem;
+import in.ds.sa3a.material.widget.*;
+import in.ds.maaad.group.model.*;
+import in.ds.maaad.group.preference.*;
+import java.util.*;
+import android.support.v7.widget.Toolbar;
 
 /*
  * Demo of creating an application to open any URL inside the application and clicking on any link from that URl 
@@ -24,17 +25,30 @@ should not open Native browser but  that URL should open in the same screen.
 
 - Load WebView with progress bar
  */
-public class MaaadWebActivity extends Activity{
+public class MaaadWebActivity extends ActionBarActivity{
     /** Called when the activity is first created. */
 	
 	private CustomWebView mMaaadWebView;
 	private LinearLayout mSplashLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-	private ProgressBar mProgressBar;
- // variables for drawer layout
+	private ProgressBarDeterminate mProgressBar;
+	
+	private String mUrl = "http://www.maaadgroup.com";
+	
+	// variables for drawer layout
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private String[] itemList;
+	
+	
+	// error handling, shared prefs and TrayPreferences
+	private static final String TAG = MaaadWebActivity.class.getSimpleName();
+	private SharedPreferences mPreferences;
+
+	
+
+
+	int backgroundColor = Color.parseColor("#1E88E5");
 
     private ArrayList<NavDrawerItem> mItems;
     private NavDrawerAdapter adapter;
@@ -43,8 +57,36 @@ public class MaaadWebActivity extends Activity{
 	@SuppressLint("setJavaScriptEnabled")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_web_layout);
+		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		if(mPreferences==null){
+			Toast.makeText(this, "Preference kosong", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+        // set the main content view (for drawer position)
+
+		if(mPreferences.getString("drawer_pos", "0").equals("0"))
+			setContentView(R.layout.main_web_layout);
+		else
+			setContentView(R.layout.main_web_layout_drawer_right);
+			// recreate activity when something important was just changed
+		if (getIntent().getBooleanExtra("core_settings_changed", false)) {
+			finish(); // finish and create a new Instance
+			Intent restart = new Intent(MaaadWebActivity.this, MaaadWebActivity.class);
+			startActivity(restart);
+		}
+		// set a toolbar to replace the action bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		BarTinting tintManager = new BarTinting(this);
+		tintManager.setStatusBarTintEnabled(true);
+		tintManager.setStatusBarTintResource(R.color.semi_transparent);
+		tintManager.setNavigationBarTintEnabled(true);
+		tintManager.setNavigationBarTintResource(R.color.semi_transparent);
         
+
 		// piece of code for drawer layout
         itemList = getResources().getStringArray(R.array.item_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,37 +101,66 @@ public class MaaadWebActivity extends Activity{
         mItems.add(new NavDrawerItem(itemList[5], R.drawable.ic_menu_calendar));
         mItems.add(new NavDrawerItem(itemList[6], R.drawable.ic_menu_help));
         mItems.add(new NavDrawerItem(itemList[7], R.drawable.ic_menu_search));
+		mItems.add(new NavDrawerItem(itemList[8], R.drawable.ic_menu_help));
+		
 
         adapter = new NavDrawerAdapter(this, mItems);
-
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(adapter);
-
-
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		
         mMaaadWebView = (CustomWebView) findViewById(R.id.activity_main_webview);
+		
         mSplashLayout = (LinearLayout)findViewById(R.id.splashLayout);
-		mProgressBar = (ProgressBar) findViewById(R.id.progres_loading);
+		
+		mProgressBar = (ProgressBarDeterminate) findViewById(R.id.progres_loading);
+		
+		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		
         mMaaadWebView.setWebViewClient(new MaaadWebClient());
+		mMaaadWebView.setWebChromeClient(new WebChromeClient () {
+			
+				public void onProgressChanged(WebView view, int progress) {
+					if (mPreferences.getBoolean("progress_bar", true)) {
+						if (progress < 100 && mProgressBar.getVisibility() == View.GONE) {
+							mProgressBar.setVisibility(View.VISIBLE);
+						}
+						mProgressBar.setProgress(progress);
+						if (progress == 100) {
+							mProgressBar.setVisibility(View.GONE);
+						}
+					} else {
+						// if progress bar is disabled hide it immediately
+						mProgressBar.setVisibility(View.GONE);
+					}
+						
+					}
+				
+			
+			
+		});
+		
         mMaaadWebView.getSettings().setJavaScriptEnabled(true);
-        mMaaadWebView.loadUrl("http://www.maaadgroup.com");
-        mMaaadWebView.setOnScrollChangedCallback(new CustomWebView.OnScrollChangedCallback() {
-            @Override
-            public void onScroll(int l, int t) {
-                if(t>10){
-                    if(getActionBar().isShowing())
-                        getActionBar().hide();
-                }else{
-                    if(!getActionBar().isShowing())
-                        getActionBar().show();
-                }
-            }
-        });
+		mMaaadWebView.getSettings().setUseWideViewPort(true);
+		mMaaadWebView.getSettings().setLoadWithOverviewMode(true);
+		mMaaadWebView.getSettings().setAllowFileAccess(true);
+	    mMaaadWebView.getSettings().setDisplayZoomControls(true);
+		
+		mMaaadWebView.setBackgroundColor(getResources().getColor(R.color.transparent));
+        mMaaadWebView.loadUrl(mUrl);
+     
+		
+		
+		
 		swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
-        swipeRefreshLayout.setColorSchemeColors(Color.BLUE);
+        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
 		
-	}
+		
+		
+		}
+		
+	
 	// the click listener for ListView in the navigation drawer
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -105,10 +176,10 @@ public class MaaadWebActivity extends Activity{
 			case 0:
 				mMaaadWebView.loadUrl("javascript:scroll(0,0)");
 				break;
-case 1:
+			case 1:
 				mMaaadWebView.loadUrl("http://maaadgroup.com/usercp.php");
 				break;
-case 2:
+			case 2:
 				mMaaadWebView.loadUrl("http://maaadgroup.com/index.php");
 				break;
 			case 3:
@@ -126,8 +197,13 @@ case 2:
 			case 7:
 				mMaaadWebView.loadUrl("http://maaadgroup.com/search.php");
 				break;
+			case 8:
+				Intent settings = new Intent(this, SettingsActivity.class);
+				startActivity(settings);
+				break;
 			
 	}
+
 	// update selected item, then close the drawer
 	mDrawerList.setItemChecked(position, true);
 	mDrawerLayout.closeDrawer(mDrawerList);
@@ -156,6 +232,8 @@ case 2:
 
 				}, 2000);
         }};
+		
+		
 	
     
     public class MaaadWebClient extends WebViewClient
@@ -166,7 +244,6 @@ case 2:
     	public void onPageStarted(WebView view, String url, Bitmap favicon) {
     		// TODO Auto-generated method stub
     		super.onPageStarted(view, url, favicon);
-			mProgressBar.setVisibility(View.VISIBLE);
      
     	}
     	
@@ -178,8 +255,7 @@ case 2:
 			if (Uri.parse(url).getHost().endsWith("maaadgroup.com")) {
 				return false;
 			}
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			view.getContext().startActivity(intent);
+			
 			return false;
 		}
 		
@@ -196,7 +272,6 @@ case 2:
     		// TODO Auto-generated method stub
     		super.onPageFinished(view, url);
             mSplashLayout.setVisibility(View.GONE);
-			mProgressBar.setVisibility(View.GONE);
 		}
     }
     

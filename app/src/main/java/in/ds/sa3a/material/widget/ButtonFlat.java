@@ -1,5 +1,4 @@
-package ds.sa3a.material.widget;
-
+package in.ds.sa3a.material.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,8 +8,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import ds.sa3a.material.widget.*;
-import ds.sa3a.material.utils.*;
+import in.ds.sa3a.material.widget.*;
+import in.ds.sa3a.material.utils.*;
 import in.ds.maaad.group.*;
 
 public class ButtonFlat extends Button {
@@ -94,7 +93,7 @@ public class ButtonFlat extends Button {
 	 */
 	@Override
 	protected int makePressColor(){
-		return Color.parseColor("#FF00FFFB");	
+		return Color.parseColor("#88000000");	
 	}
 	
 	public void setText(String text){

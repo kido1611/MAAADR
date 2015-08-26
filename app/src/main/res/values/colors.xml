@@ -20,4 +20,6 @@
     <color name="preferenceTitle">#000000</color>
     <color name="editText">#000000</color>
     <color name="aboutText">#6d6d6d</color>
+<color name="transparent">#000000</color>
+<color name="semi_transparent">#88000000</color>
 </resources>
