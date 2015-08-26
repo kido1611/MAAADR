@@ -2,6 +2,8 @@ package in.ds.maaad.group.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +21,14 @@ import in.ds.maaad.group.R;
 public class NavDrawerAdapter  extends BaseAdapter{
     private Context context;
     private ArrayList<NavDrawerItem> mItems;
-
+    private SharedPreferences pref;
+    private LayoutInflater mInflater;
     public NavDrawerAdapter(Context context, ArrayList<NavDrawerItem> items){
         this.context = context;
         this.mItems = items;
+        pref = PreferenceManager.getDefaultSharedPreferences(context);
+        mInflater = (LayoutInflater)
+                context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -40,13 +46,19 @@ public class NavDrawerAdapter  extends BaseAdapter{
         return position;
     }
 
+    private boolean isDrawerinLeft(){
+        if(pref.getString("drawer_pos", "0").equals("0")){
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater mInflater = (LayoutInflater)
-                    context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        if(isDrawerinLeft())
             convertView = mInflater.inflate(R.layout.drawer_list_item, null);
-        }
+        else
+            convertView = mInflater.inflate(R.layout.drawer_list_item_right, null);
 
         ImageView imgIcon = (ImageView) convertView.findViewById(R.id.icon);
         TextView txtTitle = (TextView) convertView.findViewById(R.id.title);

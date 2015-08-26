@@ -33,7 +33,7 @@
 	<string name="applying_changes">Applying changes</string>
 	<string name="clear_cache">Clear cache</string>
     <string name="clear_cache_description">Clear app cache. It will also log you out.</string>
-	<string name="drawer_pos">Sliding menu position &#8635;</string>
+	<string name="drawer_pos">Sliding menu position</string>
     <string name="drawer_pos_description">Menu is %s side of the screen.</string>
 	<string-array name="drawerPosTitles">
         <item>on the left</item>

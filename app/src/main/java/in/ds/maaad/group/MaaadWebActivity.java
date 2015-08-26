@@ -64,11 +64,13 @@ public class MaaadWebActivity extends ActionBarActivity{
 		}
 		
         // set the main content view (for drawer position)
+		setContentView(R.layout.main_web_layout);
 
-		if(mPreferences.getString("drawer_pos", "0").equals("0"))
-			setContentView(R.layout.main_web_layout);
+		/*if(mPreferences.getString("drawer_pos", "0").equals("0"))
+
 		else
-			setContentView(R.layout.main_web_layout_drawer_right);
+			setContentView(R.layout.main_web_layout_drawer_right);*/
+
 			// recreate activity when something important was just changed
 		if (getIntent().getBooleanExtra("core_settings_changed", false)) {
 			finish(); // finish and create a new Instance
@@ -118,26 +120,25 @@ public class MaaadWebActivity extends ActionBarActivity{
 		mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
         mMaaadWebView.setWebViewClient(new MaaadWebClient());
-		mMaaadWebView.setWebChromeClient(new WebChromeClient () {
-			
-				public void onProgressChanged(WebView view, int progress) {
-					if (mPreferences.getBoolean("progress_bar", true)) {
-						if (progress < 100 && mProgressBar.getVisibility() == View.GONE) {
-							mProgressBar.setVisibility(View.VISIBLE);
-						}
-						mProgressBar.setProgress(progress);
-						if (progress == 100) {
-							mProgressBar.setVisibility(View.GONE);
-						}
-					} else {
-						// if progress bar is disabled hide it immediately
+		mMaaadWebView.setWebChromeClient(new WebChromeClient() {
+
+			public void onProgressChanged(WebView view, int progress) {
+				if (mPreferences.getBoolean("progress_bar", true)) {
+					if (progress < 100 && mProgressBar.getVisibility() == View.GONE) {
+						mProgressBar.setVisibility(View.VISIBLE);
+					}
+					mProgressBar.setProgress(progress);
+					if (progress == 100) {
 						mProgressBar.setVisibility(View.GONE);
 					}
-						
-					}
-				
-			
-			
+				} else {
+					// if progress bar is disabled hide it immediately
+					mProgressBar.setVisibility(View.GONE);
+				}
+
+			}
+
+
 		});
 		
         mMaaadWebView.getSettings().setJavaScriptEnabled(true);
@@ -156,9 +157,33 @@ public class MaaadWebActivity extends ActionBarActivity{
         swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
         swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary);
 		
-		
-		
+		setupViewDrawer();
+
+	}
+
+	private void setupViewDrawer(){
+		int gravity;
+		if(mDrawerLayout==null) return;
+		int childCount = mDrawerLayout.getChildCount();
+		if(childCount>=2){
+			View drawerView = mDrawerLayout.getChildAt(1);
+			DrawerLayout.LayoutParams mParams = (DrawerLayout.LayoutParams) drawerView.getLayoutParams();
+			gravity = Gravity.START;
+			if(mPreferences.getString("drawer_pos", "0").equals("0")){
+				gravity=Gravity.START;
+			}else if(mPreferences.getString("drawer_pos", "0").equals("1")){
+				gravity=Gravity.END;
+			}
+			mParams.gravity = gravity;
+			//drawerView.setLayoutParams(mParams);
+			mDrawerLayout.removeViewAt(1);
+			mDrawerLayout.addView(drawerView, 1, mParams);
+			mDrawerLayout.invalidate();
+			//mDrawerLayout.closeDrawers();
+			mDrawerLayout.openDrawer(mDrawerList);
+			adapter.notifyDataSetChanged();
 		}
+	}
 		
 	
 	// the click listener for ListView in the navigation drawer
@@ -204,9 +229,9 @@ public class MaaadWebActivity extends ActionBarActivity{
 			
 	}
 
-	// update selected item, then close the drawer
-	mDrawerList.setItemChecked(position, true);
-	mDrawerLayout.closeDrawer(mDrawerList);
+		// update selected item, then close the drawer
+		mDrawerList.setItemChecked(position, true);
+		mDrawerLayout.closeDrawers();
 	}
     
 
@@ -279,7 +304,10 @@ public class MaaadWebActivity extends ActionBarActivity{
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) 
 	{
-		if ((keyCode == KeyEvent.KEYCODE_BACK) && mMaaadWebView.canGoBack()) {
+		if((keyCode==KeyEvent.KEYCODE_BACK) && mDrawerLayout.isDrawerOpen(mDrawerList)){
+			mDrawerLayout.closeDrawers();
+			return true;
+		}else if ((keyCode == KeyEvent.KEYCODE_BACK) && mMaaadWebView.canGoBack()) {
 			mMaaadWebView.goBack();
 			return true;
 		}
@@ -290,6 +318,7 @@ public class MaaadWebActivity extends ActionBarActivity{
     @Override
     protected void onResume() {
         super.onResume();
+		setupViewDrawer();
     }
 
     @Override

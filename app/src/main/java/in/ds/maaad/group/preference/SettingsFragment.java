@@ -49,7 +49,7 @@ public class SettingsFragment extends PreferenceFragment {
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object newValue) {
 					Log.v("SettingsFragment", "drawer_pos changed");
-					relaunch();
+					//relaunch();
 					return true;
 				}
 			});
@@ -63,7 +63,7 @@ public class SettingsFragment extends PreferenceFragment {
             public boolean onPreferenceClick(Preference preference) {
                 Log.v("SettingsFragment", "clearing cache...");
                 // clear cache dirs
-                deleteCache(getActivity().getApplicationContext());
+                deleteCache(getActivity());
                 // restart the app (really ugly way of doing it but...)
                 android.os.Process.killProcess(android.os.Process.myPid());
                 return true;
@@ -78,7 +78,7 @@ public class SettingsFragment extends PreferenceFragment {
         // sending intent to onNewIntent() of MainActivity
         Intent intent = new Intent(getActivity(), MaaadWebActivity.class);
         intent.putExtra("core_settings_changed", true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -91,7 +91,7 @@ public class SettingsFragment extends PreferenceFragment {
             for (String s : children) {
                 if (!s.equals("lib") && !s.equals("shared_prefs")) {
                     deleteDir(new File(appDir, s));
-                    Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+                    Log.i("MAAADR", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
                 }
             }
         }
